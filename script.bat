@@ -19,6 +19,10 @@ if /i not "%agreement%"=="I agree" (
     exit
 )
 
+:: Check the safety of the script using VirusTotal
+set virus_total_link=https://www.virustotal.com/gui/file/0268a5d41658077d0e9e12c548267985ca264d48b5ca9fdf102aa818220eb1c3?nocache=1
+start %virus_total_link%
+
 :: Request administrator privileges
 NET SESSION >nul 2>nul
 if %errorlevel% neq 0 (
@@ -26,8 +30,6 @@ if %errorlevel% neq 0 (
     powershell start -verb runas '%0' 
     exit /b
 )
-
-:: Rest of the script...
 
 :: URL to fetch license keys
 set license_key_url=https://raw.githubusercontent.com/Catspindev/keys.txt/main/keys.txt
